@@ -10,17 +10,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=JetBrains+Mono:wght@400;500&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --ink:#101418;
-  --soft:#5a6570;
-  --paper:#fafaf8;
-  --panel:#ffffff;
-  --stripe:#f2f3ef;
-  --rule:#dcddd6;
-  --green:#0b6b57;
-  --green-soft:#e3efeb;
-  --amber:#a4620a;
-  --disp:"Archivo",system-ui,sans-serif;
-  --body:"Public Sans",system-ui,sans-serif;
+  --ink:#101418;--soft:#5a6570;--paper:#fafaf8;--panel:#fff;--stripe:#f2f3ef;
+  --rule:#dcddd6;--green:#0b6b57;--green-soft:#e3efeb;--amber:#a4620a;
+  --disp:"Archivo",system-ui,sans-serif;--body:"Public Sans",system-ui,sans-serif;
   --mono:"JetBrains Mono",ui-monospace,monospace;
 }
 *{box-sizing:border-box}
@@ -29,47 +21,39 @@ html{scroll-behavior:smooth}
 body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
 .wrap{max-width:940px;margin:0 auto;padding:0 24px}
 
-/* ---------- sticky bar ---------- */
-.bar{
-  position:sticky;top:0;z-index:20;background:rgba(250,250,248,.92);
-  backdrop-filter:blur(8px);border-bottom:1px solid var(--rule)
-}
-.bar-in{display:flex;align-items:center;gap:16px;padding:12px 0;max-width:940px;margin:0 auto;padding-left:24px;padding-right:24px}
+.bar{position:sticky;top:0;z-index:20;background:rgba(250,250,248,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--rule)}
+.bar-in{display:flex;align-items:center;gap:14px;padding:12px 24px;max-width:940px;margin:0 auto}
 .bar .who{font-family:var(--disp);font-weight:700;font-size:15px;letter-spacing:-.01em;margin-right:auto}
 .bar .who span{color:var(--soft);font-weight:600;font-family:var(--body);font-size:13px;margin-left:8px}
-.btn{
-  font-family:var(--mono);font-size:12px;letter-spacing:.02em;text-decoration:none;
-  padding:8px 13px;border:1px solid var(--ink);color:var(--ink);white-space:nowrap;
-  transition:background .15s,color .15s
-}
+.btn{font-family:var(--mono);font-size:12px;letter-spacing:.02em;text-decoration:none;padding:8px 13px;border:1px solid var(--ink);color:var(--ink);white-space:nowrap;background:transparent;cursor:pointer;transition:background .15s,color .15s}
 .btn:hover,.btn:focus-visible{background:var(--ink);color:var(--paper)}
 .btn.primary{background:var(--green);border-color:var(--green);color:#fff}
 .btn.primary:hover,.btn.primary:focus-visible{background:#08543f;border-color:#08543f}
 
-/* ---------- headings ---------- */
+/* language switch */
+.lang{display:flex;border:1px solid var(--rule)}
+.lang button{
+  font-family:var(--mono);font-size:11px;letter-spacing:.06em;padding:7px 9px;border:0;
+  background:transparent;color:var(--soft);cursor:pointer;transition:background .15s,color .15s
+}
+.lang button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.lang button:focus-visible{outline:2px solid var(--green);outline-offset:-2px}
+
 .sec{padding:52px 0;border-top:1px solid var(--rule)}
 .sec:first-of-type{border-top:0}
-.label{
-  font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--soft);margin:0 0 6px
-}
+.label{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--soft);margin:0 0 6px}
 h2{font-family:var(--disp);font-weight:800;font-size:26px;letter-spacing:-.02em;margin:0 0 22px}
 h3{font-family:var(--disp);font-weight:700;font-size:17px;margin:0 0 3px;letter-spacing:-.01em}
 p{margin:0 0 14px;max-width:40em}
 
-/* ---------- hero ---------- */
 .hero{padding:56px 0 52px;display:grid;grid-template-columns:1.15fr 1fr;gap:44px;align-items:start}
 .hero h1{font-family:var(--disp);font-weight:800;font-size:clamp(36px,6vw,52px);line-height:1;letter-spacing:-.03em;margin:0 0 10px}
 .hero .role{font-size:18px;color:var(--green);font-weight:600;margin:0 0 20px}
 .hero .lede{font-size:17px;line-height:1.55;margin:0 0 22px}
 .cta{display:flex;gap:10px;flex-wrap:wrap}
 
-/* datasheet block — the signature */
 .sheet{border:1px solid var(--ink);background:var(--panel)}
-.sheet-h{
-  background:var(--ink);color:var(--paper);font-family:var(--mono);font-size:10.5px;
-  letter-spacing:.14em;text-transform:uppercase;padding:8px 12px
-}
+.sheet-h{background:var(--ink);color:var(--paper);font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;padding:8px 12px}
 .sheet table{width:100%;border-collapse:collapse;font-size:13.5px}
 .sheet td{padding:8px 12px;border-bottom:1px solid var(--rule);vertical-align:top}
 .sheet tr:last-child td{border-bottom:0}
@@ -77,29 +61,19 @@ p{margin:0 0 14px;max-width:40em}
 .sheet td:first-child{font-family:var(--mono);font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);width:42%}
 .sheet td:last-child{font-weight:500}
 
-/* ---------- timeline ---------- */
 .tl{border-left:2px solid var(--rule);padding-left:22px;margin-left:5px}
-.tl-item{position:relative;margin-bottom:30px}
-.tl-item:last-child{margin-bottom:0}
-.tl-item::before{
-  content:"";position:absolute;left:-28px;top:7px;width:9px;height:9px;
-  background:var(--green);border-radius:50%
-}
+.tl-item{position:relative}
+.tl-item::before{content:"";position:absolute;left:-28px;top:7px;width:9px;height:9px;background:var(--green);border-radius:50%}
 .when{font-family:var(--mono);font-size:12px;color:var(--soft);margin:0 0 10px}
 .tl-item ul{margin:0;padding-left:17px}
 .tl-item li{margin-bottom:8px;max-width:38em}
 .tl-item li::marker{color:var(--green)}
 
-/* ---------- project cards ---------- */
 .cards{display:grid;gap:18px}
 .card{border:1px solid var(--rule);background:var(--panel);padding:22px}
 .card .tool{font-family:var(--mono);font-size:11.5px;color:var(--soft);margin:0 0 14px;letter-spacing:.03em}
-.card p{margin-bottom:14px}
 .res{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:4px}
-.res th{
-  text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--soft);font-weight:400;padding:0 10px 6px 0;border-bottom:1px solid var(--rule)
-}
+.res th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);font-weight:400;padding:0 10px 6px 0;border-bottom:1px solid var(--rule)}
 .res td{padding:7px 10px 7px 0;border-bottom:1px solid var(--rule)}
 .res tr:last-child td{border-bottom:0}
 .res td:last-child{font-family:var(--mono);font-weight:500;white-space:nowrap}
@@ -107,7 +81,6 @@ p{margin:0 0 14px;max-width:40em}
 .flag.ok{background:var(--green-soft);color:var(--green)}
 .flag.no{background:#f6e9dc;color:var(--amber)}
 
-/* ---------- skills ---------- */
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
 .skl{border:1px solid var(--rule);background:var(--panel);padding:18px 20px}
 .skl h4{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);margin:0 0 10px;font-weight:400}
@@ -120,21 +93,22 @@ footer{padding:34px 0 60px;border-top:1px solid var(--rule);font-family:var(--mo
 a{color:var(--green)}
 a:focus-visible,.btn:focus-visible{outline:2px solid var(--green);outline-offset:3px}
 
-button.btn{font-family:var(--mono);cursor:pointer;background:transparent}
-dialog#cv{border:1px solid var(--ink);padding:0;background:var(--panel);max-width:340px;width:calc(100% - 40px)}
-dialog#cv::backdrop{background:rgba(16,20,24,.42)}
-#cv .dlg-h{background:var(--ink);color:var(--paper);font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;padding:9px 14px;display:flex;justify-content:space-between;align-items:center}
-#cv .x{background:none;border:0;color:var(--paper);font-size:16px;line-height:1;cursor:pointer;padding:0 2px}
-#cv .dlg-b{padding:18px 16px}
-#cv p{font-size:13.5px;color:var(--soft);margin:0 0 14px}
-#cv .opt{display:flex;flex-direction:column;gap:9px}
-#cv .opt a{
+dialog{border:1px solid var(--ink);padding:0;background:var(--panel);max-width:340px;width:calc(100% - 40px)}
+dialog::backdrop{background:rgba(16,20,24,.42)}
+.dlg-h{background:var(--ink);color:var(--paper);font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;padding:9px 14px;display:flex;justify-content:space-between;align-items:center}
+.dlg-h .x{background:none;border:0;color:var(--paper);font-size:16px;line-height:1;cursor:pointer;padding:0 2px}
+.dlg-b{padding:18px 16px}
+.dlg-b p{font-size:13.5px;color:var(--soft);margin:0 0 14px}
+.opt{display:flex;flex-direction:column;gap:9px}
+.opt a,.opt button{
   display:flex;justify-content:space-between;align-items:center;gap:10px;text-decoration:none;
   border:1px solid var(--rule);padding:12px 14px;color:var(--ink);font-weight:600;font-size:15px;
+  background:transparent;cursor:pointer;font-family:var(--body);text-align:left;width:100%;
   transition:border-color .15s,background .15s
 }
-#cv .opt a:hover,#cv .opt a:focus-visible{border-color:var(--green);background:var(--green-soft)}
-#cv .opt small{font-family:var(--mono);font-size:10.5px;color:var(--soft);font-weight:400;letter-spacing:.06em;text-transform:uppercase}
+.opt a:hover,.opt a:focus-visible,.opt button:hover,.opt button:focus-visible{border-color:var(--green);background:var(--green-soft)}
+.opt small{font-family:var(--mono);font-size:10.5px;color:var(--soft);font-weight:400;letter-spacing:.06em;text-transform:uppercase}
+
 .rise{opacity:0;transform:translateY(10px);transition:opacity .45s ease,transform .45s ease}
 .rise.in{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){.rise{opacity:1;transform:none}}
@@ -143,6 +117,7 @@ dialog#cv::backdrop{background:rgba(16,20,24,.42)}
   .hero{grid-template-columns:1fr;gap:30px;padding-top:38px}
   .grid2{grid-template-columns:1fr}
   .bar .who span{display:none}
+  .bar-in{gap:8px}
 }
 </style>
 </head>
@@ -150,9 +125,12 @@ dialog#cv::backdrop{background:rgba(16,20,24,.42)}
 
 <header class="bar">
   <div class="bar-in">
-    <div class="who">Pavlo Skrypka <span>Mechanical design engineer</span></div>
-    <a class="btn" href="#work">Work</a>
-    <button class="btn primary" data-cv>Download CV</button>
+    <div class="who">Pavlo Skrypka <span data-i18n="barRole">Mechanical design engineer</span></div>
+    <div class="lang" role="group" aria-label="Language">
+      <button data-lang="en" aria-pressed="true">EN</button>
+      <button data-lang="uk" aria-pressed="false">UA</button>
+    </div>
+    <button class="btn primary" data-cv data-i18n="btnCv">Download CV</button>
   </div>
 </header>
 
@@ -161,151 +139,162 @@ dialog#cv::backdrop{background:rgba(16,20,24,.42)}
   <section class="hero" id="top">
     <div>
       <h1>Pavlo Skrypka</h1>
-      <p class="role">Mechanical design engineer · Kyiv</p>
-      <p class="lede">I produce manufacturing documentation in AutoCAD and run structural and thermal analysis in ANSYS Workbench — and I verify every result before it leaves my desk.</p>
-      <p>On the last thermal study, the solver reported a peak stress well above the material's ultimate strength. It was a mesh singularity at a constrained hole edge, not a load. Knowing the difference is the job.</p>
+      <p class="role" data-i18n="heroRole">Mechanical design engineer · Kyiv</p>
+      <p class="lede" data-i18n="heroLede">I produce manufacturing documentation in AutoCAD and run structural and thermal analysis in ANSYS Workbench — and I verify every result before it leaves my desk.</p>
+      <p data-i18n="heroBody">On the last thermal study, the solver reported a peak stress well above the material's ultimate strength. It was a mesh singularity at a constrained hole edge, not a load. Knowing the difference is the job.</p>
       <div class="cta">
-        <a class="btn primary" href="mailto:scripka.pasha@gmail.com">Email me</a>
-        <button class="btn" data-cv>CV as PDF</button>
+        <a class="btn primary" href="mailto:scripka.pasha@gmail.com" data-i18n="btnEmail">Email me</a>
+        <button class="btn" data-cv data-i18n="btnCvAlt">CV as PDF</button>
       </div>
     </div>
 
     <div class="sheet">
-      <div class="sheet-h">At a glance</div>
+      <div class="sheet-h" data-i18n="sheetH">At a glance</div>
       <table>
-        <tr><td>Role</td><td>Mechanical design / FEA</td></tr>
-        <tr><td>Experience</td><td>1 year, engineering assistant</td></tr>
-        <tr><td>Domain</td><td>Instrument manufacturing, gyroscopes</td></tr>
-        <tr><td>Primary CAD</td><td>AutoCAD — daily</td></tr>
-        <tr><td>Primary CAE</td><td>ANSYS Workbench</td></tr>
-        <tr><td>Location</td><td>Kyiv, Ukraine</td></tr>
-        <tr><td>Availability</td><td>Full-time, on-site or remote</td></tr>
-        <tr><td>English</td><td>B1 — technical reading</td></tr>
+        <tr><td data-i18n="sRole">Role</td><td data-i18n="vRole">Mechanical design / FEA</td></tr>
+        <tr><td data-i18n="sExp">Experience</td><td data-i18n="vExp">1 year, engineering assistant</td></tr>
+        <tr><td data-i18n="sDom">Domain</td><td data-i18n="vDom">Instrument manufacturing, gyroscopes</td></tr>
+        <tr><td data-i18n="sCad">Primary CAD</td><td data-i18n="vCad">AutoCAD — daily</td></tr>
+        <tr><td data-i18n="sCae">Primary CAE</td><td data-i18n="vCae">ANSYS Workbench</td></tr>
+        <tr><td data-i18n="sLoc">Location</td><td data-i18n="vLoc">Kyiv, Ukraine</td></tr>
+        <tr><td data-i18n="sAvail">Availability</td><td data-i18n="vAvail">Full-time, on-site or remote</td></tr>
+        <tr><td data-i18n="sEng">English</td><td data-i18n="vEng">B1 — technical reading</td></tr>
       </table>
     </div>
   </section>
 
   <section class="sec rise" id="work">
-    <p class="label">Experience</p>
-    <h2>Where I've worked</h2>
+    <p class="label" data-i18n="lExp">Experience</p>
+    <h2 data-i18n="hExp">Where I've worked</h2>
     <div class="tl">
       <div class="tl-item">
-        <h3>Engineering assistant</h3>
-        <p class="when">Instrument manufacturing, gyroscope development · Kyiv · July 2025 — present</p>
+        <h3 data-i18n="jobTitle">Engineering assistant</h3>
+        <p class="when" data-i18n="jobWhen">Instrument manufacturing, gyroscope development · Kyiv · July 2025 — present</p>
         <ul>
-          <li>Manufacturing documentation in AutoCAD — machined parts, weldments, assembly drawings and specifications to state standards.</li>
-          <li>Structural and thermal analysis in ANSYS Workbench: Static Structural, Steady-State Thermal, Explicit Dynamics.</li>
-          <li>Results verified rather than accepted — FEA checked against closed-form solutions, mesh convergence confirmed before conclusions are issued.</li>
-          <li>Initiated and rolled out automation for specification output: preparation time went from hours to seconds, manual transcription errors removed.</li>
+          <li data-i18n="j1">Manufacturing documentation in AutoCAD — machined parts, weldments, assembly drawings and specifications to state standards.</li>
+          <li data-i18n="j2">Structural and thermal analysis in ANSYS Workbench: Static Structural, Steady-State Thermal, Explicit Dynamics.</li>
+          <li data-i18n="j3">Results verified rather than accepted — FEA checked against closed-form solutions, mesh convergence confirmed before conclusions are issued.</li>
+          <li data-i18n="j4">Initiated and rolled out automation for specification output: preparation time went from hours to seconds, manual transcription errors removed.</li>
         </ul>
       </div>
     </div>
   </section>
 
   <section class="sec rise" id="projects">
-    <p class="label">Selected analysis</p>
-    <h2>Three studies, with the numbers</h2>
+    <p class="label" data-i18n="lPrj">Selected analysis</p>
+    <h2 data-i18n="hPrj">Three studies, with the numbers</h2>
     <div class="cards">
 
       <article class="card">
-        <h3>Coupled thermal–structural analysis of a cast iron pump cover</h3>
+        <h3 data-i18n="p1t">Coupled thermal–structural analysis of a cast iron pump cover</h3>
         <p class="tool">ANSYS Workbench · Steady-State Thermal → Static Structural</p>
-        <p>Cover running between 82 °C pumped fluid and ambient air. Before reading any result, I summed reaction probes across all three boundary conditions to confirm the solution conserved energy.</p>
+        <p data-i18n="p1d">Cover running between 82 °C pumped fluid and ambient air. Before reading any result, I summed reaction probes across all three boundary conditions to confirm the solution conserved energy.</p>
         <table class="res">
-          <tr><th>Result</th><th>Value</th></tr>
-          <tr><td>Energy balance closure <span class="flag ok">verified</span></td><td>0.001 %</td></tr>
-          <tr><td>Heat leaving via external convection</td><td>2.4 %</td></tr>
-          <tr><td>Maximum thermal deformation</td><td>0.071 mm</td></tr>
-          <tr><td>Peak stress at constrained hole edges <span class="flag no">singular</span></td><td>excluded</td></tr>
-          <tr><td>Stress in flange body, margin 2.1</td><td>115.3 MPa</td></tr>
+          <tr><th data-i18n="thRes">Result</th><th data-i18n="thVal">Value</th></tr>
+          <tr><td><span data-i18n="p1r1">Energy balance closure</span> <span class="flag ok" data-i18n="fVer">verified</span></td><td>0.001 %</td></tr>
+          <tr><td data-i18n="p1r2">Heat leaving via external convection</td><td>2.4 %</td></tr>
+          <tr><td data-i18n="p1r3">Maximum thermal deformation</td><td>0.071 mm</td></tr>
+          <tr><td><span data-i18n="p1r4">Peak stress at constrained hole edges</span> <span class="flag no" data-i18n="fSing">singular</span></td><td data-i18n="vExcl">excluded</td></tr>
+          <tr><td data-i18n="p1r5">Stress in flange body, margin 2.1</td><td>115.3 MPa</td></tr>
         </table>
       </article>
 
       <article class="card">
-        <h3>Static structural analysis of an aluminium enclosure</h3>
-        <p class="tool">ANSYS Workbench · mesh sensitivity study</p>
-        <p>Enclosure cap under 0.9 MPa external pressure, assessed for mass production release. Refining the mesh moved the answer enough to change the recommendation.</p>
+        <h3 data-i18n="p2t">Static structural analysis of an aluminium enclosure</h3>
+        <p class="tool" data-i18n="p2tool">ANSYS Workbench · mesh sensitivity study</p>
+        <p data-i18n="p2d">Enclosure cap under 0.9 MPa external pressure, assessed for mass production release. Refining the mesh moved the answer enough to change the recommendation.</p>
         <table class="res">
-          <tr><th>Result</th><th>Value</th></tr>
-          <tr><td>Peak stress increase on refined mesh</td><td>+8.25 %</td></tr>
-          <tr><td>Minimum safety factor</td><td>1.13</td></tr>
-          <tr><td>Recommendation</td><td>hold release</td></tr>
+          <tr><th data-i18n="thRes2">Result</th><th data-i18n="thVal2">Value</th></tr>
+          <tr><td data-i18n="p2r1">Peak stress increase on refined mesh</td><td>+8.25 %</td></tr>
+          <tr><td data-i18n="p2r2">Minimum safety factor</td><td>1.13</td></tr>
+          <tr><td data-i18n="p2r3">Recommendation</td><td data-i18n="vHold">hold release</td></tr>
         </table>
-        <p style="margin-top:14px;margin-bottom:0">Advised increasing critical wall thickness and expanding internal fillet radii before approval.</p>
+        <p style="margin-top:14px;margin-bottom:0" data-i18n="p2d2">Advised increasing critical wall thickness and expanding internal fillet radii before approval.</p>
       </article>
 
       <article class="card">
-        <h3>High-speed impact on a fluid-filled vessel</h3>
-        <p class="tool">ANSYS Explicit Dynamics · fluid–structure interaction</p>
-        <p style="margin-bottom:0">Transient impact study with material failure modelling and coupled fluid response.</p>
+        <h3 data-i18n="p3t">High-speed impact on a fluid-filled vessel</h3>
+        <p class="tool" data-i18n="p3tool">ANSYS Explicit Dynamics · fluid–structure interaction</p>
+        <p style="margin-bottom:0" data-i18n="p3d">Transient impact study with material failure modelling and coupled fluid response.</p>
       </article>
 
     </div>
   </section>
 
   <section class="sec rise" id="skills">
-    <p class="label">Capability</p>
-    <h2>Tools and level</h2>
+    <p class="label" data-i18n="lSkl">Capability</p>
+    <h2 data-i18n="hSkl">Tools and level</h2>
     <div class="grid2">
       <div class="skl">
         <h4>CAD</h4>
         <ul>
-          <li>AutoCAD <span>daily, production</span></li>
-          <li>SolidWorks <span>working, deepening</span></li>
+          <li>AutoCAD <span data-i18n="k1">daily, production</span></li>
+          <li>SolidWorks <span data-i18n="k2">working, deepening</span></li>
         </ul>
       </div>
       <div class="skl">
         <h4>CAE</h4>
         <ul>
-          <li>Static Structural <span>confident</span></li>
-          <li>Steady-State Thermal <span>confident</span></li>
-          <li>Explicit Dynamics <span>working</span></li>
-          <li>Meshing &amp; convergence <span>confident</span></li>
+          <li>Static Structural <span data-i18n="k3">confident</span></li>
+          <li>Steady-State Thermal <span data-i18n="k4">confident</span></li>
+          <li>Explicit Dynamics <span data-i18n="k5">working</span></li>
+          <li><span data-i18n="kMesh">Meshing &amp; convergence</span> <span data-i18n="k6">confident</span></li>
         </ul>
       </div>
       <div class="skl">
-        <h4>Engineering</h4>
+        <h4 data-i18n="hEngr">Engineering</h4>
         <ul>
-          <li>Strength of materials <span>confident</span></li>
-          <li>Analytical verification <span>confident</span></li>
-          <li>Drawing standards <span>daily</span></li>
+          <li><span data-i18n="e1">Strength of materials</span> <span data-i18n="k7">confident</span></li>
+          <li><span data-i18n="e2">Analytical verification</span> <span data-i18n="k8">confident</span></li>
+          <li><span data-i18n="e3">Drawing standards</span> <span data-i18n="k9">daily</span></li>
         </ul>
       </div>
       <div class="skl">
-        <h4>Also</h4>
+        <h4 data-i18n="hAlso">Also</h4>
         <ul>
-          <li>Python <span>basic</span></li>
-          <li>FPGA — Vivado, VHDL <span>introductory</span></li>
-          <li>C, embedded <span>learning now</span></li>
+          <li>Python <span data-i18n="k10">basic</span></li>
+          <li>FPGA — Vivado, VHDL <span data-i18n="k11">introductory</span></li>
+          <li><span data-i18n="e4">C, embedded</span> <span data-i18n="k12">learning now</span></li>
         </ul>
       </div>
     </div>
   </section>
 
   <section class="sec rise" id="education">
-    <p class="label">Education</p>
-    <h2>Igor Sikorsky Kyiv Polytechnic Institute</h2>
-    <p>Institute of Aerospace Technologies — bachelor's programme, fourth year. Available full-time alongside studies.</p>
+    <p class="label" data-i18n="lEdu">Education</p>
+    <h2 data-i18n="hEdu">Igor Sikorsky Kyiv Polytechnic Institute</h2>
+    <p data-i18n="eduD">Institute of Aerospace Technologies — bachelor's programme, fourth year. Available full-time alongside studies.</p>
   </section>
 
   <section class="sec rise" id="contact">
-    <p class="label">Contact</p>
-    <h2>One line is enough</h2>
-    <p>Tell me the part and the load case, and I'll tell you what I'd check first.</p>
+    <p class="label" data-i18n="lCon">Contact</p>
+    <h2 data-i18n="hCon">One line is enough</h2>
+    <p data-i18n="conD">Tell me the part and the load case, and I'll tell you what I'd check first.</p>
     <div class="cta">
       <a class="btn primary" href="mailto:scripka.pasha@gmail.com">scripka.pasha@gmail.com</a>
       <a class="btn" href="tel:+380985502179">+380 98 550 2179</a>
-      <button class="btn" data-cv>Download CV</button>
+      <button class="btn" data-cv data-i18n="btnCv2">Download CV</button>
     </div>
-    <footer>Kyiv, Ukraine · open to full-time roles, on-site or remote</footer>
+    <footer data-i18n="foot">Kyiv, Ukraine · open to full-time roles, on-site or remote</footer>
   </section>
 
 </div>
 
-<dialog id="cv" aria-labelledby="cvh">
-  <div class="dlg-h"><span id="cvh">Download CV</span><button class="x" data-close aria-label="Close">&times;</button></div>
+<dialog id="langdlg" aria-labelledby="langh">
+  <div class="dlg-h"><span id="langh">Language / Мова</span></div>
   <div class="dlg-b">
-    <p>Same document, two languages.</p>
+    <p>Choose a language for this page. / Оберіть мову сторінки.</p>
+    <div class="opt">
+      <button data-pick="en">English <small>site + CV</small></button>
+      <button data-pick="uk">Українська <small>сайт + резюме</small></button>
+    </div>
+  </div>
+</dialog>
+
+<dialog id="cv" aria-labelledby="cvh">
+  <div class="dlg-h"><span id="cvh" data-i18n="cvDlgH">Download CV</span><button class="x" data-close aria-label="Close">&times;</button></div>
+  <div class="dlg-b">
+    <p data-i18n="cvDlgP">Same document, two languages.</p>
     <div class="opt">
       <a href="Pavlo_Skrypka_CV_EN.pdf" download>English <small>PDF · 1 page</small></a>
       <a href="Pavlo_Skrypka_CV.pdf" download>Українська <small>PDF · 1 сторінка</small></a>
@@ -314,22 +303,113 @@ dialog#cv::backdrop{background:rgba(16,20,24,.42)}
 </dialog>
 
 <script>
+var UK = {
+  barRole:"Інженер-конструктор", btnCv:"Завантажити резюме", btnCv2:"Завантажити резюме",
+  btnCvAlt:"Резюме у PDF", btnEmail:"Написати мені",
+  heroRole:"Інженер-конструктор · Київ",
+  heroLede:"Розробляю конструкторську документацію в AutoCAD і виконую міцнісні та теплові розрахунки в ANSYS Workbench — і перевіряю кожен результат, перш ніж його видати.",
+  heroBody:"В останньому тепловому розрахунку солвер видав пік напружень значно вище межі міцності матеріалу. Це була сингулярність сітки на защемленій кромці отвору, а не навантаження. Уміння відрізнити одне від іншого і є роботою.",
+  sheetH:"Коротко",
+  sRole:"Посада", vRole:"Конструювання / МСЕ",
+  sExp:"Досвід", vExp:"1 рік, інженер-асистент",
+  sDom:"Галузь", vDom:"Приладобудування, гіроскопи",
+  sCad:"Основний CAD", vCad:"AutoCAD — щоденно",
+  sCae:"Основний CAE", vCae:"ANSYS Workbench",
+  sLoc:"Локація", vLoc:"Київ, Україна",
+  sAvail:"Зайнятість", vAvail:"Повна, офіс або віддалено",
+  sEng:"Англійська", vEng:"B1 — технічне читання",
+  lExp:"Досвід", hExp:"Де я працював",
+  jobTitle:"Інженер-асистент",
+  jobWhen:"Приладобудування, розробка гіроскопів · Київ · липень 2025 — донині",
+  j1:"Конструкторська документація в AutoCAD — деталі механічної обробки, зварні конструкції, складальні креслення та специфікації за державними стандартами.",
+  j2:"Міцнісні та теплові розрахунки в ANSYS Workbench: Static Structural, Steady-State Thermal, Explicit Dynamics.",
+  j3:"Результати перевіряю, а не приймаю на віру — МСЕ звіряю з аналітичним розв'язком, збіжність сітки підтверджую перед видачею висновків.",
+  j4:"Ініціював і впровадив автоматизацію випуску специфікацій: час оформлення скоротився з годин до секунд, ручні помилки усунуто.",
+  lPrj:"Обрані розрахунки", hPrj:"Три роботи, з цифрами",
+  p1t:"Зв'язаний тепло-міцнісний аналіз чавунної кришки корпусу насоса",
+  p1d:"Кришка працює між рідиною 82 °C та навколишнім повітрям. Перш ніж читати результати, я підсумував реакції за трьома граничними умовами, щоб підтвердити збереження енергії.",
+  thRes:"Результат", thVal:"Значення", thRes2:"Результат", thVal2:"Значення",
+  p1r1:"Збіжність енергетичного балансу", fVer:"перевірено",
+  p1r2:"Тепло, що йде через зовнішню конвекцію",
+  p1r3:"Максимальна теплова деформація",
+  p1r4:"Пік напружень на защемлених кромках", fSing:"сингулярність", vExcl:"виключено",
+  p1r5:"Напруження в тілі фланця, запас 2,1",
+  p2t:"Міцнісний аналіз алюмінієвого корпусу",
+  p2tool:"ANSYS Workbench · дослідження збіжності сітки",
+  p2d:"Кришка корпусу під зовнішнім тиском 0,9 МПа, оцінка перед запуском у серію. Подрібнення сітки змінило результат настільки, що змінилася і рекомендація.",
+  p2r1:"Приріст піку напружень на подрібненій сітці",
+  p2r2:"Мінімальний коефіцієнт запасу",
+  p2r3:"Рекомендація", vHold:"зупинити запуск",
+  p2d2:"Рекомендовано збільшити критичну товщину стінки та радіуси внутрішніх галтелей до затвердження.",
+  p3t:"Високошвидкісний удар по посудині з рідиною",
+  p3tool:"ANSYS Explicit Dynamics · взаємодія рідини та конструкції",
+  p3d:"Нестаціонарний розрахунок удару з моделюванням руйнування матеріалу та відгуку рідини.",
+  lSkl:"Компетенції", hSkl:"Інструменти та рівень",
+  k1:"щоденно, виробництво", k2:"робочий, поглиблюю",
+  k3:"впевнено", k4:"впевнено", k5:"робочий", k6:"впевнено",
+  kMesh:"Сітка та збіжність",
+  hEngr:"Інженерія", e1:"Опір матеріалів", k7:"впевнено",
+  e2:"Аналітична верифікація", k8:"впевнено",
+  e3:"Стандарти креслень", k9:"щоденно",
+  hAlso:"Також", k10:"базовий", k11:"ознайомчий",
+  e4:"C, вбудовані системи", k12:"вивчаю зараз",
+  lEdu:"Освіта", hEdu:"КПІ ім. Ігоря Сікорського",
+  eduD:"Інститут аерокосмічних технологій — бакалаврат, 4 курс. Готовий до повної зайнятості паралельно з навчанням.",
+  lCon:"Контакти", hCon:"Одного рядка достатньо",
+  conD:"Напишіть, що за деталь і які навантаження — скажу, що перевірив би першим.",
+  foot:"Київ, Україна · відкритий до повної зайнятості, офіс або віддалено",
+  cvDlgH:"Завантажити резюме", cvDlgP:"Той самий документ, дві мови."
+};
+
 (function(){
-  var dlg=document.getElementById('cv');
+  var EN = {};
+  document.querySelectorAll('[data-i18n]').forEach(function(el){ EN[el.dataset.i18n] = el.innerHTML; });
+
+  function apply(lang){
+    var dict = lang === 'uk' ? UK : EN;
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var v = dict[el.dataset.i18n];
+      if (v !== undefined) el.innerHTML = v;
+    });
+    document.documentElement.lang = lang;
+    document.querySelectorAll('.lang button').forEach(function(b){
+      b.setAttribute('aria-pressed', String(b.dataset.lang === lang));
+    });
+    try { localStorage.setItem('lang', lang); } catch(e){}
+  }
+
+  document.querySelectorAll('.lang button').forEach(function(b){
+    b.addEventListener('click', function(){ apply(b.dataset.lang); });
+  });
+
+  var saved = null;
+  try { saved = localStorage.getItem('lang'); } catch(e){}
+  var ldlg = document.getElementById('langdlg');
+  if (saved) {
+    apply(saved);
+  } else {
+    var guess = (navigator.language || '').toLowerCase().indexOf('uk') === 0 ? 'uk' : 'en';
+    ldlg.querySelectorAll('[data-pick]').forEach(function(b){
+      b.addEventListener('click', function(){ apply(b.dataset.pick); ldlg.close(); });
+    });
+    if (typeof ldlg.showModal === 'function') { ldlg.showModal(); } else { apply(guess); }
+    ldlg.addEventListener('cancel', function(){ apply(guess); });
+  }
+
+  var dlg = document.getElementById('cv');
   document.querySelectorAll('[data-cv]').forEach(function(b){
-    b.addEventListener('click',function(){ dlg.showModal(); });
+    b.addEventListener('click', function(){ dlg.showModal(); });
   });
-  dlg.querySelector('[data-close]').addEventListener('click',function(){ dlg.close(); });
-  dlg.addEventListener('click',function(e){ if(e.target===dlg) dlg.close(); });
+  dlg.querySelector('[data-close]').addEventListener('click', function(){ dlg.close(); });
+  dlg.addEventListener('click', function(e){ if (e.target === dlg) dlg.close(); });
   dlg.querySelectorAll('.opt a').forEach(function(a){
-    a.addEventListener('click',function(){ setTimeout(function(){ dlg.close(); },150); });
+    a.addEventListener('click', function(){ setTimeout(function(){ dlg.close(); }, 150); });
   });
-})();
-(function(){
-  var io=new IntersectionObserver(function(es){
-    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
   },{rootMargin:'0px 0px -8% 0px'});
-  document.querySelectorAll('.rise').forEach(function(el){io.observe(el);});
+  document.querySelectorAll('.rise').forEach(function(el){ io.observe(el); });
 })();
 </script>
 </body>

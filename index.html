@@ -109,6 +109,21 @@ dialog::backdrop{background:rgba(16,20,24,.42)}
 .opt a:hover,.opt a:focus-visible,.opt button:hover,.opt button:focus-visible{border-color:var(--green);background:var(--green-soft)}
 .opt small{font-family:var(--mono);font-size:10.5px;color:var(--soft);font-weight:400;letter-spacing:.06em;text-transform:uppercase}
 
+.report{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;
+  margin-top:18px;padding:13px 16px;border:0;background:var(--green);color:#fff;
+  font-family:var(--body);font-weight:600;font-size:15px;cursor:pointer;text-align:left;
+  transition:background .15s
+}
+.report:hover,.report:focus-visible{background:#08543f}
+.report small{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;opacity:.85;font-weight:400;white-space:nowrap}
+dialog#viewer{max-width:none;width:92vw;height:88vh;padding:0;display:flex;flex-direction:column;border:1px solid var(--ink)}
+dialog#viewer[open]{display:flex}
+#viewer .dlg-h{flex:0 0 auto;gap:12px}
+#viewer .dlg-h .t{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#viewer .dlg-h a{color:var(--paper);font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-decoration:underline}
+#viewer iframe{flex:1 1 auto;width:100%;border:0;background:var(--stripe)}
+#viewer .fallback{padding:14px 16px;font-size:13px;color:var(--soft);border-top:1px solid var(--rule);background:var(--panel)}
 .rise{opacity:0;transform:translateY(10px);transition:opacity .45s ease,transform .45s ease}
 .rise.in{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){.rise{opacity:1;transform:none}}
@@ -197,6 +212,9 @@ dialog::backdrop{background:rgba(16,20,24,.42)}
           <tr><td><span data-i18n="p1r4">Peak stress at constrained hole edges</span> <span class="flag no" data-i18n="fSing">singular</span></td><td data-i18n="vExcl">excluded</td></tr>
           <tr><td data-i18n="p1r5">Stress in flange body, margin 2.1</td><td>115.3 MPa</td></tr>
         </table>
+              <button class="report" data-report="Case_Thermal_Structural_Pump_Cover.pdf" data-title-key="p1t">
+          <span data-i18n="btnReport">Open full report</span> <small>PDF · 4 pages</small>
+        </button>
       </article>
 
       <article class="card">
@@ -210,12 +228,18 @@ dialog::backdrop{background:rgba(16,20,24,.42)}
           <tr><td data-i18n="p2r3">Recommendation</td><td data-i18n="vHold">hold release</td></tr>
         </table>
         <p style="margin-top:14px;margin-bottom:0" data-i18n="p2d2">Advised increasing critical wall thickness and expanding internal fillet radii before approval.</p>
+              <button class="report" data-report="Case_Aluminium_Enclosure.pdf" data-title-key="p2t">
+          <span data-i18n="btnReport">Open full report</span> <small>PDF · 5 pages</small>
+        </button>
       </article>
 
       <article class="card">
         <h3 data-i18n="p3t">High-speed impact on a fluid-filled vessel</h3>
         <p class="tool" data-i18n="p3tool">ANSYS Explicit Dynamics · fluid–structure interaction</p>
         <p style="margin-bottom:0" data-i18n="p3d">Transient impact study with material failure modelling and coupled fluid response.</p>
+              <button class="report" data-report="Case_Impact_FSI_Vessel.pdf" data-title-key="p3t">
+          <span data-i18n="btnReport">Open full report</span> <small>PDF · 3 pages</small>
+        </button>
       </article>
 
     </div>
@@ -291,6 +315,16 @@ dialog::backdrop{background:rgba(16,20,24,.42)}
   </div>
 </dialog>
 
+<dialog id="viewer" aria-labelledby="vh">
+  <div class="dlg-h">
+    <span class="t" id="vh">Report</span>
+    <a href="#" target="_blank" rel="noopener" data-newtab data-i18n="vNewTab">Open in new tab</a>
+    <button class="x" data-vclose aria-label="Close">&times;</button>
+  </div>
+  <iframe title="Report" src="about:blank"></iframe>
+  <div class="fallback" data-i18n="vFallback">If the report does not display, open it in a new tab.</div>
+</dialog>
+
 <dialog id="cv" aria-labelledby="cvh">
   <div class="dlg-h"><span id="cvh" data-i18n="cvDlgH">Download CV</span><button class="x" data-close aria-label="Close">&times;</button></div>
   <div class="dlg-b">
@@ -358,7 +392,9 @@ var UK = {
   lCon:"Контакти", hCon:"Одного рядка достатньо",
   conD:"Напишіть, що за деталь і які навантаження — скажу, що перевірив би першим.",
   foot:"Київ, Україна · відкритий до повної зайнятості, офіс або віддалено",
-  cvDlgH:"Завантажити резюме", cvDlgP:"Той самий документ, дві мови."
+  cvDlgH:"Завантажити резюме", cvDlgP:"Той самий документ, дві мови.",
+  btnReport:"Відкрити повний звіт", vNewTab:"Відкрити в новій вкладці",
+  vFallback:"Якщо звіт не відображається — відкрийте його в новій вкладці."
 };
 
 (function(){
@@ -395,6 +431,25 @@ var UK = {
     if (typeof ldlg.showModal === 'function') { ldlg.showModal(); } else { apply(guess); }
     ldlg.addEventListener('cancel', function(){ apply(guess); });
   }
+
+  var vw = document.getElementById('viewer');
+  var vframe = vw.querySelector('iframe');
+  var vtitle = vw.querySelector('#vh');
+  var vnew = vw.querySelector('[data-newtab]');
+  document.querySelectorAll('[data-report]').forEach(function(b){
+    b.addEventListener('click', function(){
+      var f = b.dataset.report;
+      var card = b.closest('.card');
+      var h = card ? card.querySelector('h3') : null;
+      vtitle.textContent = h ? h.textContent : 'Report';
+      vframe.src = f + '#view=FitH';
+      vnew.href = f;
+      vw.showModal();
+    });
+  });
+  function vclose(){ vw.close(); vframe.src = 'about:blank'; }
+  vw.querySelector('[data-vclose]').addEventListener('click', vclose);
+  vw.addEventListener('close', function(){ vframe.src = 'about:blank'; });
 
   var dlg = document.getElementById('cv');
   document.querySelectorAll('[data-cv]').forEach(function(b){

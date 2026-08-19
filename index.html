@@ -117,7 +117,8 @@ dialog::backdrop{background:rgba(16,20,24,.42)}
 }
 .report:hover,.report:focus-visible{background:#08543f}
 .report small{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;opacity:.85;font-weight:400;white-space:nowrap}
-dialog#viewer{max-width:none;width:92vw;height:88vh;padding:0;display:flex;flex-direction:column;border:1px solid var(--ink)}
+dialog#viewer{max-width:none;width:92vw;height:88vh;padding:0;flex-direction:column;border:1px solid var(--ink)}
+dialog#viewer:not([open]){display:none}
 dialog#viewer[open]{display:flex}
 #viewer .dlg-h{flex:0 0 auto;gap:12px}
 #viewer .dlg-h .t{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}

@@ -31,7 +31,9 @@ body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);f
 .btn.primary:hover,.btn.primary:focus-visible{background:#08543f;border-color:#08543f}
 
 /* language switch */
-.lang{display:flex;border:1px solid var(--rule)}
+.bar .who{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bar .btn.primary{min-width:200px;text-align:center}
+.lang{display:flex;border:1px solid var(--rule);flex:0 0 auto}
 .lang button{
   font-family:var(--mono);font-size:11px;letter-spacing:.06em;padding:7px 9px;border:0;
   background:transparent;color:var(--soft);cursor:pointer;transition:background .15s,color .15s
@@ -134,6 +136,7 @@ dialog#viewer[open]{display:flex}
   .grid2{grid-template-columns:1fr}
   .bar .who span{display:none}
   .bar-in{gap:8px}
+  .bar .btn.primary{min-width:0;padding:8px 10px}
 }
 </style>
 </head>
